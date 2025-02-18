@@ -2,7 +2,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SALI AI - Solana Integration</title>
+    <title>EchoMindAI - Solana Integration</title>
+    <script>
+        async function connectWallet() {
+            if (window.solana && window.solana.isPhantom) {
+                try {
+                    const response = await window.solana.connect();
+                    document.getElementById('wallet-address').innerText = `Connected: ${response.publicKey.toString()}`;
+                } catch (err) {
+                    console.error("Wallet connection failed", err);
+                }
+            } else {
+                alert("Please install Phantom Wallet!");
+            }
+        }
+    </script>
     <style>
         * {
             margin: 0;
@@ -21,6 +35,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            text-align: center;
         }
 
         header {
@@ -29,6 +44,11 @@
         }
 
         .logo {
+            max-width: 150px;
+            margin-bottom: 1rem;
+        }
+
+        .title {
             font-size: 4rem;
             font-weight: bold;
             background: linear-gradient(90deg, #00f6ff 0%, #00c8ff 100%);
@@ -55,31 +75,6 @@
             text-align: center;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .feature {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature h3 {
-            color: #00f6ff;
-            margin-bottom: 1rem;
-        }
-
         .button {
             background: linear-gradient(90deg, #7928CA 0%, #FF0080 100%);
             color: white;
@@ -98,19 +93,13 @@
         .button:hover {
             transform: translateY(-2px);
         }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-            color: #a0aec0;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 class="logo">SALI AI</h1>
+            <img src="logo.png" alt="EchoMindAI Logo" class="logo">
+            <h1 class="title">EchoMindAI</h1>
             <p class="subtitle">Advanced Solana Integration Solutions</p>
         </header>
 
@@ -118,27 +107,13 @@
             <div class="card">
                 <h2>Connect Your Solana Wallet</h2>
                 <p style="margin: 1rem 0; color: #a0aec0;">Secure and seamless crypto transactions</p>
-                <button class="button">Connect Wallet</button>
-            </div>
-
-            <div class="feature-grid">
-                <div class="feature">
-                    <h3>Secure Transactions</h3>
-                    <p>Advanced encryption and security protocols to protect your assets</p>
-                </div>
-                <div class="feature">
-                    <h3>Fast Processing</h3>
-                    <p>Lightning-fast transaction processing on the Solana network</p>
-                </div>
-                <div class="feature">
-                    <h3>AI Integration</h3>
-                    <p>Smart contract optimization with artificial intelligence</p>
-                </div>
+                <button class="button" onclick="connectWallet()">Connect Wallet</button>
+                <p id="wallet-address" style="margin-top: 1rem; color: #00f6ff;"></p>
             </div>
         </main>
 
         <footer>
-            <p>&copy; 2025 SALI AI. All rights reserved.</p>
+            <p>&copy; 2025 EchoMindAI. All rights reserved.</p>
         </footer>
     </div>
 </body>
