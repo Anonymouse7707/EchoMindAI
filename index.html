@@ -13,7 +13,7 @@
             header.innerHTML = `
                 <img src="logo.png" alt="EchoMindAI Logo" class="logo" style="max-width: 150px; margin-bottom: 1rem;">
                 <h1 class="title" style="font-size: 4rem; font-weight: bold; background: linear-gradient(90deg, #00f6ff 0%, #00c8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">EchoMindAI</h1>
-                <p class="subtitle" style="font-size: 1.2rem; color: #a0aec0;">Advanced Solana Integration Solutions</p>
+                <p class="subtitle" style="font-size: 1.2rem; color: #a0aec0;">Advanced Solana Integration & AI Development</p>
             `;
             app.appendChild(header);
 
@@ -25,9 +25,30 @@
                 <h2>Connect Your Solana Wallet</h2>
                 <p style="margin: 1rem 0; color: #a0aec0;">Secure and seamless crypto transactions</p>
                 <button id="connect-button" class="button" style="background: linear-gradient(90deg, #7928CA 0%, #FF0080 100%); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease; display: inline-block; text-decoration: none; margin-top: 1rem;">Connect Wallet</button>
+                <button id="disconnect-button" class="button" style="background: linear-gradient(90deg, #FF0080 0%, #FF5722 100%); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease; display: inline-block; text-decoration: none; margin-top: 1rem;">Disconnect Wallet</button>
                 <p id="wallet-address" style="margin-top: 1rem; color: #00f6ff;"></p>
             `;
             app.appendChild(card);
+
+            // AI Power Tools and Development Features
+            const features = document.createElement("div");
+            features.className = "features";
+            features.style = "display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem;";
+            features.innerHTML = `
+                <div class="feature" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; text-align: center; transition: transform 0.3s ease;">
+                    <h3 style="color: #00f6ff;">AI Smart Contracts</h3>
+                    <p>Automate and optimize transactions using AI-driven smart contracts.</p>
+                </div>
+                <div class="feature" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; text-align: center; transition: transform 0.3s ease;">
+                    <h3 style="color: #00f6ff;">AI-Powered Trading</h3>
+                    <p>Leverage AI insights to make better investment decisions.</p>
+                </div>
+                <div class="feature" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; text-align: center; transition: transform 0.3s ease;">
+                    <h3 style="color: #00f6ff;">DApp Development</h3>
+                    <p>Develop decentralized applications with advanced AI tools.</p>
+                </div>
+            `;
+            app.appendChild(features);
 
             // Create Footer
             const footer = document.createElement("footer");
@@ -49,7 +70,13 @@
                 }
             }
             
+            // Disconnect Wallet Function
+            function disconnectWallet() {
+                document.getElementById("wallet-address").innerText = "Wallet Disconnected";
+            }
+
             document.getElementById("connect-button").addEventListener("click", connectWallet);
+            document.getElementById("disconnect-button").addEventListener("click", disconnectWallet);
         });
     </script>
     <style>
