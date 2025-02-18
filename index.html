@@ -1,21 +1,56 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EchoMindAI - Solana Integration</title>
     <script>
-        async function connectWallet() {
-            if (window.solana && window.solana.isPhantom) {
-                try {
-                    const response = await window.solana.connect();
-                    document.getElementById('wallet-address').innerText = `Connected: ${response.publicKey.toString()}`;
-                } catch (err) {
-                    console.error("Wallet connection failed", err);
+        document.addEventListener("DOMContentLoaded", function() {
+            const app = document.getElementById("app");
+            
+            // Create Header
+            const header = document.createElement("header");
+            header.innerHTML = `
+                <img src="logo.png" alt="EchoMindAI Logo" class="logo" style="max-width: 150px; margin-bottom: 1rem;">
+                <h1 class="title" style="font-size: 4rem; font-weight: bold; background: linear-gradient(90deg, #00f6ff 0%, #00c8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">EchoMindAI</h1>
+                <p class="subtitle" style="font-size: 1.2rem; color: #a0aec0;">Advanced Solana Integration Solutions</p>
+            `;
+            app.appendChild(header);
+
+            // Create Card for Wallet Connection
+            const card = document.createElement("div");
+            card.className = "card";
+            card.style = "background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); border: 1px solid rgba(255, 255, 255, 0.1); margin: 2rem auto; max-width: 600px; text-align: center;";
+            card.innerHTML = `
+                <h2>Connect Your Solana Wallet</h2>
+                <p style="margin: 1rem 0; color: #a0aec0;">Secure and seamless crypto transactions</p>
+                <button id="connect-button" class="button" style="background: linear-gradient(90deg, #7928CA 0%, #FF0080 100%); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease; display: inline-block; text-decoration: none; margin-top: 1rem;">Connect Wallet</button>
+                <p id="wallet-address" style="margin-top: 1rem; color: #00f6ff;"></p>
+            `;
+            app.appendChild(card);
+
+            // Create Footer
+            const footer = document.createElement("footer");
+            footer.style = "text-align: center; padding: 2rem; margin-top: 4rem; color: #a0aec0;";
+            footer.innerHTML = "<p>&copy; 2025 EchoMindAI. All rights reserved.</p>";
+            app.appendChild(footer);
+
+            // Connect Wallet Function
+            async function connectWallet() {
+                if (window.solana && window.solana.isPhantom) {
+                    try {
+                        const response = await window.solana.connect();
+                        document.getElementById("wallet-address").innerText = `Connected: ${response.publicKey.toString()}`;
+                    } catch (err) {
+                        console.error("Wallet connection failed", err);
+                    }
+                } else {
+                    alert("Please install Phantom Wallet!");
                 }
-            } else {
-                alert("Please install Phantom Wallet!");
             }
-        }
+            
+            document.getElementById("connect-button").addEventListener("click", connectWallet);
+        });
     </script>
     <style>
         * {
@@ -29,92 +64,12 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             color: white;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            text-align: center;
             padding: 2rem;
-            text-align: center;
-        }
-
-        header {
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .logo {
-            max-width: 150px;
-            margin-bottom: 1rem;
-        }
-
-        .title {
-            font-size: 4rem;
-            font-weight: bold;
-            background: linear-gradient(90deg, #00f6ff 0%, #00c8ff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #a0aec0;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: center;
-        }
-
-        .button {
-            background: linear-gradient(90deg, #7928CA 0%, #FF0080 100%);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            display: inline-block;
-            text-decoration: none;
-            margin-top: 1rem;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.png" alt="EchoMindAI Logo" class="logo">
-            <h1 class="title">EchoMindAI</h1>
-            <p class="subtitle">Advanced Solana Integration Solutions</p>
-        </header>
-
-        <main>
-            <div class="card">
-                <h2>Connect Your Solana Wallet</h2>
-                <p style="margin: 1rem 0; color: #a0aec0;">Secure and seamless crypto transactions</p>
-                <button class="button" onclick="connectWallet()">Connect Wallet</button>
-                <p id="wallet-address" style="margin-top: 1rem; color: #00f6ff;"></p>
-            </div>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 EchoMindAI. All rights reserved.</p>
-        </footer>
-    </div>
+    <div id="app"></div>
 </body>
 </html>
